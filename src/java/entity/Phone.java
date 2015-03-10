@@ -6,6 +6,7 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -20,10 +21,10 @@ import javax.persistence.ManyToOne;
 public class Phone implements Serializable {
     private static final long serialVersionUID = 1L;
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     
-    private int number;
+    private int phoneNumber;
     private String description;
     
     @ManyToOne
@@ -33,16 +34,16 @@ public class Phone implements Serializable {
     }
 
     public Phone(int number, String description) {
-        this.number = number;
+        this.phoneNumber = number;
         this.description = description;
     }
     
     public int getNumber() {
-        return number;
+        return phoneNumber;
     }
 
     public void setNumber(int number) {
-        this.number = number;
+        this.phoneNumber = number;
     }
 
     public String getDescription() {
