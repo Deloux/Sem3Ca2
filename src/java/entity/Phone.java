@@ -6,12 +6,14 @@
 package entity;
 
 import java.io.Serializable;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import org.eclipse.persistence.jpa.config.Cascade;
 
 /**
  *
@@ -36,6 +38,10 @@ public class Phone implements Serializable {
     public Phone(int number, String description) {
         this.phoneNumber = number;
         this.description = description;
+    }
+
+    public void setInfoEntity(InfoEntity infoEntity) {
+        this.infoEntity = infoEntity;
     }
     
     public int getNumber() {

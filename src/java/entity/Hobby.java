@@ -33,7 +33,6 @@ public class Hobby implements Serializable {
 
     public void addPerson(Person p){
         persons.add(p);
-        p.addHobby(this);
     }
     
     public Hobby() {

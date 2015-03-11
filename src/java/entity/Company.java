@@ -16,14 +16,16 @@ public class Company extends InfoEntity{
     private int numEmployees;
     private int marketValue;
 
-    public Company(String name, String description, int cvr, int numEmployees, int marketValue) {
+    public Company(String name, String description, int cvr, int numEmployees, int marketValue, String email) {
+        super(email);
         this.name = name;
         this.description = description;
         this.cvr = cvr;
         this.numEmployees = numEmployees;
         this.marketValue = marketValue;
     }
-    
+
+   
     public Company() {
     }
     
