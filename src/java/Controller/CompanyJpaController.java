@@ -6,7 +6,9 @@
 package Controller;
 
 import Controller.exceptions.NonexistentEntityException;
+import entity.Address;
 import entity.Company;
+import entity.Person;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -134,5 +136,24 @@ public class CompanyJpaController implements Serializable {
             em.close();
         }
     }
-    
-}
+
+//    public void assignCompanyToAddress(int id, Address a) {
+//        EntityManager em = getEntityManager();
+//        try {
+//            Company c = em.getReference(Company.class, id);
+//            a.addInfoEntity(c);
+//            em.getTransaction().begin();
+//            em.merge(a);
+//            em.getTransaction().commit();
+//        } finally {
+//            em.close();
+//        }
+//    }
+
+    public List<Company> getCompHigherThanxxEmp(int empAmount) {
+        EntityManager em = getEntityManager();
+        Query q = em.createQuery("SELECT c FROM Company c WHERE c.numEmployees > :empAmount").setParameter(":empAmount", empAmount);
+        List<Company> companies = q.getResultList();
+        return companies;
+    }   
+    }

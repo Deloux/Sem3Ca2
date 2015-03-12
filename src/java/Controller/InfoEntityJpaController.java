@@ -44,6 +44,7 @@ public class InfoEntityJpaController implements Serializable {
             }
         }
     }
+    
 
     public void edit(InfoEntity infoEntity) throws NonexistentEntityException, Exception {
         EntityManager em = null;

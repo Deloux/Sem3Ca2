@@ -50,6 +50,10 @@ public class InfoEntity implements Serializable {
         this.email = email;
     }
 
+    public void setAddress(Address address) {
+        this.address = address;
+    }
+
     public Integer getId() {
         return id;
     }

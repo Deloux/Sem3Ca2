@@ -6,6 +6,8 @@
 package Controller;
 
 import Controller.exceptions.NonexistentEntityException;
+import entity.Address;
+import entity.Hobby;
 import entity.Person;
 import java.io.Serializable;
 import java.util.List;
@@ -15,6 +17,7 @@ import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import static oracle.security.o3logon.b.a;
 
 /**
  *
@@ -134,5 +137,29 @@ public class PersonJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+//    public void assignPersonToAddress(int id, Address a) {
+//        EntityManager em = getEntityManager();
+//        try {
+//            Person p = em.getReference(Person.class, id);
+//            a.addInfoEntity(p);
+//            em.getTransaction().begin();
+//            em.merge(a);
+//            em.getTransaction().commit();
+//        } finally {
+//            em.close();
+//        }
+//    }
+public void assignPersonToHobby(Person p, Hobby h) {
+        EntityManager em = getEntityManager();
+        try {
+            p.addHobby(h);
+            em.getTransaction().begin();
+            em.merge(h);
+            em.merge(p);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
 }

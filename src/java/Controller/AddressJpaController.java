@@ -7,6 +7,9 @@ package Controller;
 
 import Controller.exceptions.NonexistentEntityException;
 import entity.Address;
+import entity.CityInfo;
+import entity.Company;
+import entity.Person;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -31,12 +34,23 @@ public class AddressJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Address address) {
+    public void create(Address address, int zipCode) {
         EntityManager em = null;
         try {
+            CityInfoJpaController cijc = new CityInfoJpaController(emf);
+            CityInfo ci = cijc.findCityInfo(zipCode);
+            address.setCityInfo(ci);
+            
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(address);
+            em.getTransaction().commit();
+            
+            ci.addAdress(address);
+            
+           em.getTransaction().begin();
+            em.merge(ci);
+            em.merge(address);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -134,5 +148,33 @@ public class AddressJpaController implements Serializable {
             em.close();
         }
     }
-    
+
+    public void assignPersonToAddress(Address a, Person p) {
+        EntityManager em = getEntityManager();
+        try {
+            a.addInfoEntity(p);
+            p.setAddress(a);
+            em.getTransaction().begin();
+            em.merge(a);
+            em.merge(p);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+
+    public void assignCompanyToAddress(Address a, Company c) {
+        EntityManager em = getEntityManager();
+        try {
+            a.addInfoEntity(c);
+            c.setAddress(a);
+            em.getTransaction().begin();
+            em.merge(a);
+            em.merge(c);
+            em.getTransaction().commit();
+        } finally {
+            em.close();
+        }
+    }
+
 }

@@ -46,6 +46,10 @@ public class Address implements Serializable {
         this.additionalInfo = additionalInfo;
     }
 
+    public void setCityInfo(CityInfo cityInfo) {
+        this.cityInfo = cityInfo;
+    }
+
     
     public String getStreet() {
         return street;

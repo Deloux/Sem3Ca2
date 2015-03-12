@@ -140,5 +140,11 @@ public class CityInfoJpaController implements Serializable {
             em.close();
         }
     }
-    
+    public List getAllZipCodes() {
+       EntityManager em = getEntityManager();
+        
+        Query q = em.createQuery("SELECT z.zipCode FROM CityInfo z");
+        List zipCodes = q.getResultList();
+        return zipCodes;
+    }
 }

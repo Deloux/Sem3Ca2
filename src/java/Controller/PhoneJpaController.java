@@ -6,6 +6,8 @@
 package Controller;
 
 import Controller.exceptions.NonexistentEntityException;
+import entity.Company;
+import entity.Person;
 import entity.Phone;
 import java.io.Serializable;
 import java.util.List;
@@ -31,12 +33,18 @@ public class PhoneJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Phone phone) {
+    public void createAndAssingToPerson(Phone phone, Person p) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
             em.persist(phone);
+            em.getTransaction().commit();
+            
+            p.addPhone(phone);
+            
+            em.getTransaction().begin();
+            em.merge(p);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -45,6 +53,26 @@ public class PhoneJpaController implements Serializable {
         }
     }
 
+    public void createAndAssingToCompany(Phone phone, Company c) {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            em.persist(phone);
+            em.getTransaction().commit();
+            
+            c.addPhone(phone);
+            
+            em.getTransaction().begin();
+            em.merge(c);
+            em.getTransaction().commit();
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+    
     public void edit(Phone phone) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
