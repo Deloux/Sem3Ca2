@@ -6,11 +6,90 @@ and open the template in the editor.
 -->
 <html>
     <head>
-        <title>TODO supply a title</title>
+        <title>3. Semeste CA 2</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/bootstrap.min.css" />
+        <script src="js/bootstrap.min.js"></script>
     </head>
     <body>
-        <div>TODO write content</div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h1>Person web services</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="well">
+                        <h2>Find person by name</h2>
+                        
+                        <form method="GET" action="/API/person/">
+                            <div class="form-group">
+                              <label for="name">Name</label>
+                              <input type="text" class="form-control" id="name" placeholder="Enter name" />
+                            </div>
+                            <button type="submit" class="btn btn-default">Find</button>
+                        </form>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="well">
+                        <h2>Find person by phone</h2>
+                        
+                        <form method="GET" action="/API/person/">
+                            <div class="form-group">
+                              <label for="name">Phone number</label>
+                              <input type="text" class="form-control" id="name" placeholder="Enter phone number" />
+                            </div>
+                            <button type="submit" class="btn btn-default">Find</button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h1>Company web services</h1>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="well">
+                        <h2>Find company by name</h2>
+                        
+                        <form method="GET" action="/API/person/">
+                            <div class="form-group">
+                              <label for="name">Name</label>
+                              <input type="text" class="form-control" id="name" placeholder="Enter name" />
+                            </div>
+                            <button type="submit" class="btn btn-default">Find</button>
+                        </form>
+                        
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="well">
+                        <h2>Find company by phone</h2>
+                        
+                        <form method="GET" action="/API/person/">
+                            <div class="form-group">
+                              <label for="name">Phone number</label>
+                              <input type="text" class="form-control" id="name" placeholder="Enter phone number" />
+                            </div>
+                            <button type="submit" class="btn btn-default">Find</button>
+                        </form>
+                        
+                    </div>
+                </div>
+            </div>
+            
+        </div>
     </body>
 </html>
