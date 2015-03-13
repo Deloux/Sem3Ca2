@@ -11,6 +11,7 @@ import entity.Hobby;
 import entity.Person;
 import entity.Phone;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -163,7 +164,7 @@ public void assignPersonToHobby(Person p, Hobby h) {
             em.close();
         }
     }
-public String getPersonInfo(Phone ph) {
+public List<DataObject> getPersonInfo(Phone ph) {
         String result = "";
         EntityManager em = getEntityManager();
 //        try {
@@ -192,7 +193,19 @@ public String getPersonInfo(Phone ph) {
 //        Query q3 = em.createQuery("SELECT p. FROM Person p" + zip.get(0));
 //        List<String> hobby = q3.getResultList();
         
-        result = "" + name.get(0)[0] + " " + name.get(0)[1] + " " + email.get(0) + " " + street.get(0) + " " + zip.get(0).toString() + " " + city.get(0);
-        return result;
+
+        List<DataObject> objList = new ArrayList<>();
+        DataObject dataO = new DataObject(name.get(0)[0].toString(), name.get(0)[1].toString(), ph.getNumber(), email.get(0), city.get(0), street.get(0), zip.get(0));
+//        result = "" + name.get(0)[0] + " " + name.get(0)[1] + " " + email.get(0) + " " + street.get(0) + " " + zip.get(0).toString() + " " + city.get(0) + " " + per.getHobbies().get(0).getName();
+        objList.add(dataO);
+//        objList.add(new DataObject(0, name.get(0)[0].toString()));
+//        objList.add(new DataObject(1, name.get(0)[1].toString()));
+//        objList.add(new DataObject(2, ph.getNumber()));
+//        objList.add(new DataObject(3, email.get(0)));
+//        objList.add(new DataObject(4, city.get(0)));
+//        objList.add(new DataObject(5, street.get(0)));
+//        objList.add(new DataObject(6, zip.get(0)));
+//        
+        return objList;
     }
 }

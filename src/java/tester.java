@@ -65,7 +65,12 @@ public class tester {
         
 //        f.deletePerson(p);
 //        f.deleteCompany(c);
-        System.out.println(pjc.getPersonInfo(ph));
+//        String res = "";
+//        for (int i = 0; i < pjc.getPersonInfo(ph).size(); i++) {
+//            res += pjc.getPersonInfo(ph).get(i);
+//        }
+//        String json = new Gson().toJson(pjc.getPersonInfo(ph));
+        System.out.println(pjc.getPersonInfo(ph).get(0));
 //        System.out.println("name :" + p.getFirstName() + " lastname: " + p.getLastName() + " email: " + p.getEmail());
     }
 
