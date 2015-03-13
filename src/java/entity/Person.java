@@ -18,6 +18,10 @@ public class Person extends InfoEntity{
 
     @ManyToMany(cascade = CascadeType.ALL) 
     private List<Hobby> hobbies = new ArrayList();
+
+    public List<Hobby> getHobbies() {
+        return hobbies;
+    }
     
     public void addHobby(Hobby h){
         hobbies.add(h);

@@ -51,7 +51,7 @@ public class tester {
         hjc.create(h);
         pjc.assignPersonToHobby(p, h);
         ajc.assignPersonToAddress(a, p);
-       
+        
 
         
 //        f.createAddress(a, 2650);
@@ -65,8 +65,8 @@ public class tester {
         
 //        f.deletePerson(p);
 //        f.deleteCompany(c);
-        
-        System.out.println("name :" + p.getFirstName() + " lastname: " + p.getLastName() + " email: " + p.getEmail());
+        System.out.println(pjc.getPersonInfo(ph));
+//        System.out.println("name :" + p.getFirstName() + " lastname: " + p.getLastName() + " email: " + p.getEmail());
     }
 
 }

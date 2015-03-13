@@ -9,6 +9,7 @@ import Controller.exceptions.NonexistentEntityException;
 import entity.Address;
 import entity.Hobby;
 import entity.Person;
+import entity.Phone;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.EntityManager;
@@ -161,5 +162,37 @@ public void assignPersonToHobby(Person p, Hobby h) {
         } finally {
             em.close();
         }
+    }
+public String getPersonInfo(Phone ph) {
+        String result = "";
+        EntityManager em = getEntityManager();
+//        try {
+//        
+//    } catch (Exception e) {
+//    }
+        Query q = em.createQuery("SELECT p.infoEntity.id FROM Phone p where p.phoneNumber =" + ph.getNumber());
+        List<Integer> infoId = q.getResultList();
+        Query q2 = em.createQuery("SELECT p.email FROM InfoEntity p where p.id = " + infoId.get(0));
+        List<String> email = q2.getResultList();
+//        Query q3 = em.createQuery("SELECT p.address FROM InfoEntity p where p.id = " + infoId.get(0));
+//        List<String> address = q3.getResultList();
+        Query q4 = em.createQuery("SELECT p.address.id FROM InfoEntity p where p.id = " + infoId.get(0));
+        List<Integer> addId = q4.getResultList();
+        Query q8 = em.createQuery("SELECT p.firstName, p.lastName FROM Person p where p.id = " + infoId.get(0));
+        List<Object[]> name = q8.getResultList();
+        Query q5 = em.createQuery("SELECT p.street FROM Address p where p.id =" + addId.get(0));
+        List<String> street = q5.getResultList();
+        Query q6 = em.createQuery("SELECT p.cityInfo.zipCode FROM Address p where p.id =" + addId.get(0));
+        List<Integer> zip = q6.getResultList();
+        Query q7 = em.createQuery("SELECT p.city FROM CityInfo p where p.zipCode =" + zip.get(0));
+        List<String> city = q7.getResultList();
+        
+        Person per = findPerson(addId.get(0));
+//        per.getHobbies().get(0);
+//        Query q3 = em.createQuery("SELECT p. FROM Person p" + zip.get(0));
+//        List<String> hobby = q3.getResultList();
+        
+        result = "" + name.get(0)[0] + " " + name.get(0)[1] + " " + email.get(0) + " " + street.get(0) + " " + zip.get(0).toString() + " " + city.get(0);
+        return result;
     }
 }
