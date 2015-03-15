@@ -46,6 +46,16 @@ public class Address implements Serializable {
         this.additionalInfo = additionalInfo;
     }
 
+    public List<InfoEntity> getInfoEntitys() {
+        return infoEntitys;
+    }
+
+    public void setInfoEntitys(List<InfoEntity> infoEntitys) {
+        this.infoEntitys = infoEntitys;
+    }
+
+    
+    
     public void setCityInfo(CityInfo cityInfo) {
         this.cityInfo = cityInfo;
     }

@@ -168,14 +168,14 @@ public void assignPersonToHobby(Person p, Hobby h) {
             em.close();
         }
     }
-public List<DataObject> getPersonInfo(Phone ph) {
+public List<DataObject> getPersonInfo(int phoneNum) {
         String result = "";
         EntityManager em = getEntityManager();
 //        try {
 //        
 //    } catch (Exception e) {
 //    }
-        Query q = em.createQuery("SELECT p.infoEntity.id FROM Phone p where p.phoneNumber =" + ph.getNumber());
+        Query q = em.createQuery("SELECT p.infoEntity.id FROM Phone p where p.phoneNumber =" + phoneNum);
         List<Integer> infoId = q.getResultList();
         Query q2 = em.createQuery("SELECT p.email FROM InfoEntity p where p.id = " + infoId.get(0));
         List<String> email = q2.getResultList();
@@ -199,7 +199,7 @@ public List<DataObject> getPersonInfo(Phone ph) {
         
 
         List<DataObject> objList = new ArrayList<>();
-        DataObject dataO = new DataObject(name.get(0)[0].toString(), name.get(0)[1].toString(), ph.getNumber(), email.get(0), city.get(0), street.get(0), zip.get(0));
+        DataObject dataO = new DataObject(name.get(0)[0].toString(), name.get(0)[1].toString(), phoneNum, email.get(0), city.get(0), street.get(0), zip.get(0));
 //        result = "" + name.get(0)[0] + " " + name.get(0)[1] + " " + email.get(0) + " " + street.get(0) + " " + zip.get(0).toString() + " " + city.get(0) + " " + per.getHobbies().get(0).getName();
         objList.add(dataO);
 //        objList.add(new DataObject(0, name.get(0)[0].toString()));
