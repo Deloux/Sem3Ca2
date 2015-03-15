@@ -5,6 +5,12 @@
  */
 package REST;
 
+
+import Controller.PersonJpaController;
+import com.google.gson.Gson;
+import entity.Phone;
+import entity.Person;
+import java.util.List;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
@@ -20,7 +26,7 @@ import javax.ws.rs.PUT;
  * @author mads
  */
 @Path("person")
-public class Person {
+public class ApiPerson {
 
     @Context
     private UriInfo context;
@@ -28,7 +34,7 @@ public class Person {
     /**
      * Creates a new instance of Person
      */
-    public Person() {
+    public ApiPerson() {
     }
 
     /**
@@ -41,6 +47,14 @@ public class Person {
         //TODO return proper representation object
         throw new UnsupportedOperationException();
     }
+    
+    @GET
+    @Path("phone/{phone}")
+    @Produces("application/json")
+    public String find(@PathParam("phone") Integer phone) {
+       List result = new PersonJpaController().getPersonInfo(new Phone(phone, ""));
+       return new Gson().toJson(result );
+    }
 
     /**
      * PUT method for updating or creating an instance of Person
@@ -48,7 +62,10 @@ public class Person {
      * @return an HTTP response with content of the updated or created resource.
      */
     @PUT
+    @Path("{first_name}/{last_name}/{email}")
     @Consumes("application/json")
-    public void putJson(String content) {
+    public void putJson(@PathParam("first_name") String first_name, @PathParam("last_name") String last_name, @PathParam("email") String email) {
+        Person person = new Person(first_name, last_name, email);
+        new PersonJpaController().create(person);
     }
 }

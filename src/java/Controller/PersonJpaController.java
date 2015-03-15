@@ -32,6 +32,10 @@ public class PersonJpaController implements Serializable {
     }
     private EntityManagerFactory emf = null;
 
+    public PersonJpaController() {
+        
+    }
+
     public EntityManager getEntityManager() {
         return emf.createEntityManager();
     }
