@@ -44,6 +44,7 @@ public class tester {
         Hobby h = new Hobby("Football", "blabla");
         List<Hobby> hobbies = new ArrayList();
         Address a = new Address("Enghavevej 1", "bla?");
+        Address a2 = new Address("Silvanvej 4", "Silvan Silvan");
         
         pjc.create(p);
         phjc.createAndAssingToPerson(ph, p);
@@ -51,15 +52,17 @@ public class tester {
         hjc.create(h);
         pjc.assignPersonToHobby(p, h);
         ajc.assignPersonToAddress(a, p);
+        ajc.create(a2, 2650);
         
 
         
 //        f.createAddress(a, 2650);
         Phone ph2 = new Phone(11223344, "Silvans Fon");
         Company c = new Company("Silvan", "BlablaSilvanBla", 12345, 6666, 200, "silvan@silvanMail.dk");
-        
-        cjc.create(c);
+         cjc.create(c);
         phjc.createAndAssingToCompany(ph2, c);
+        
+        ajc.assignCompanyToAddress(a2, c);
         
         
         
@@ -70,7 +73,8 @@ public class tester {
 //            res += pjc.getPersonInfo(ph).get(i);
 //        }
 //        String json = new Gson().toJson(pjc.getPersonInfo(ph));
-        System.out.println(pjc.getPersonInfo(ph).get(0));
+//        System.out.println(pjc.getPersonInfo(ph).get(0));
+        System.out.println(cjc.getCompanyInfo(11223344));
 //        System.out.println("name :" + p.getFirstName() + " lastname: " + p.getLastName() + " email: " + p.getEmail());
     }
 

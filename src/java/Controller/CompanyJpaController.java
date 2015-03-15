@@ -149,11 +149,57 @@ public class CompanyJpaController implements Serializable {
 //            em.close();
 //        }
 //    }
-
     public List<Company> getCompHigherThanxxEmp(int empAmount) {
         EntityManager em = getEntityManager();
         Query q = em.createQuery("SELECT c FROM Company c WHERE c.numEmployees > :empAmount").setParameter(":empAmount", empAmount);
         List<Company> companies = q.getResultList();
         return companies;
-    }   
     }
+
+    public String getCompanyInfo(int phoneOrCvr) {
+        EntityManager em = getEntityManager();
+        String str = "";
+        String str2 = "" + phoneOrCvr;
+        if (str2.length() > 6) {
+            Query q = em.createQuery("SELECT p.infoEntity.id FROM Phone p where p.phoneNumber =" + str2);
+            List<Integer> infoId = q.getResultList();
+            Query q2 = em.createQuery("SELECT p.email FROM InfoEntity p where p.id = " + infoId.get(0));
+            List<String> email = q2.getResultList();
+//        Query q3 = em.createQuery("SELECT p.address FROM InfoEntity p where p.id = " + infoId.get(0));
+//        List<String> address = q3.getResultList();
+            Query q4 = em.createQuery("SELECT p.address.id FROM InfoEntity p where p.id = " + infoId.get(0));
+            List<Integer> addId = q4.getResultList();
+            Query q8 = em.createQuery("SELECT p.name, p.description, p.numEmployees FROM Company p where p.id = " + infoId.get(0));
+            List<Object[]> name = q8.getResultList();
+            Query q5 = em.createQuery("SELECT p.street FROM Address p where p.id =" + addId.get(0));
+            List<String> street = q5.getResultList();
+            Query q6 = em.createQuery("SELECT p.cityInfo.zipCode FROM Address p where p.id =" + addId.get(0));
+            List<Integer> zip = q6.getResultList();
+            Query q7 = em.createQuery("SELECT p.city FROM CityInfo p where p.zipCode =" + zip.get(0));
+            List<String> city = q7.getResultList();
+            str = "" + name.get(0)[0] + " " + name.get(0)[1] + " " + name.get(0)[2] + " " + email.get(0) + " " + street.get(0) + " " + zip.get(0).toString() + " " + city.get(0);
+
+        } else {
+            Query q = em.createQuery("SELECT p.id FROM Company p where p.cvr =" + str2);
+            List<Integer> infoId = q.getResultList();
+            Query q2 = em.createQuery("SELECT p.email FROM InfoEntity p where p.id = " + infoId.get(0));
+            List<String> email = q2.getResultList();
+//        Query q3 = em.createQuery("SELECT p.address FROM InfoEntity p where p.id = " + infoId.get(0));
+//        List<String> address = q3.getResultList();
+            Query q4 = em.createQuery("SELECT p.address.id FROM InfoEntity p where p.id = " + infoId.get(0));
+            List<Integer> addId = q4.getResultList();
+            Query q8 = em.createQuery("SELECT p.name, p.description, p.numEmployees FROM Company p where p.id = " + infoId.get(0));
+            List<Object[]> name = q8.getResultList();
+            Query q5 = em.createQuery("SELECT p.street FROM Address p where p.id =" + addId.get(0));
+            List<String> street = q5.getResultList();
+            Query q6 = em.createQuery("SELECT p.cityInfo.zipCode FROM Address p where p.id =" + addId.get(0));
+            List<Integer> zip = q6.getResultList();
+            Query q7 = em.createQuery("SELECT p.city FROM CityInfo p where p.zipCode =" + zip.get(0));
+            List<String> city = q7.getResultList();
+
+            str = "" + name.get(0)[0] + " " + name.get(0)[1] + " " + name.get(0)[2] + " " + email.get(0) + " " + street.get(0) + " " + zip.get(0).toString() + " " + city.get(0);
+
+        }
+        return str;
+    }
+}
