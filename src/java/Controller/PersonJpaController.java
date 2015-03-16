@@ -172,10 +172,10 @@ public class PersonJpaController implements Serializable {
         String result = "";
         EntityManager em = getEntityManager();
 
-        Query q = em.createQuery("select IE.EMAIL, P.FIRSTNAME, P.LASTNAME, A.STREET, A.CITYINFO_ZIPCODE, A.ADDITIONALINFO, H.\"NAME\", H.DESCRIPTION, CI.CITY"
-        +"from CPHMH35.INFOENTITY IE "
-        +"join CPHMH35.PERSON P on IE.ID = P.ID "
-        +"where IE.DTYPE = 'Person' ");
+        Query q = em.createQuery("select IE.email, P.firstName, P.lastName "
+        +"from InfoEntity IE "
+        +"join Person P on IE.ID = P.ID "
+        +"where IE.dType = 'Person' ");
         List<Object> queryResult = q.getResultList(); 
         return queryResult;
     }
@@ -232,10 +232,10 @@ public class PersonJpaController implements Serializable {
 //    } catch (Exception e) {
 //    }
         String[] names = name.split(" ");
-        Query q1 = em.createQuery("SELECT IE.EMAIL, P.FIRSTNAME, P.LASTNAME FROM Person p JOIN INFOENTITY ON IE.ID = P.ID WHERE p.FIRSTNAME LIKE %"+names[0]+"%");
+        Query q1 = em.createQuery("SELECT IE.email, P.firstName, P.lastName FROM Person P JOIN InfoEntity IE ON IE.id = P.ID WHERE P.firstName = "+names[0].toString()+"");
         List<Object> queryResult1 = q1.getResultList();
         
-        Query q2 = em.createQuery("SELECT IE.EMAIL, P.FIRSTNAME, P.LASTNAME FROM Person p JOIN INFOENTITY ON IE.ID = P.ID WHERE p.LASTNAME LIKE %"+names[1]+"%");
+        Query q2 = em.createQuery("SELECT IE.email, P.firstName , P.lastName FROM Person P JOIN InfoEntity IE ON IE.id = P.ID WHERE P.lastName = "+names[1].toString()+"");
         List<Object> queryResult2 = q2.getResultList();
         
         List<Object> allResults = new ArrayList<Object>(queryResult1);

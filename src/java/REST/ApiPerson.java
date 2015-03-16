@@ -11,6 +11,8 @@ import com.google.gson.Gson;
 import entity.Phone;
 import entity.Person;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
@@ -75,8 +77,15 @@ public class ApiPerson {
     
     @PUT
     @Consumes("application/json")
-    public void editPerson(@FormParam("first_name") String first_name, @FormParam("last_name") String last_name, @FormParam("email") String email) {
-        Person person = new Person(first_name, last_name, email);
-        new PersonJpaController(emf).create(person);
+    public void editPerson(String request) {
+        Person requestObj = new Gson().fromJson(request, Person.class);
+        Person person = new PersonJpaController(emf).findPerson(requestObj.getId());
+        person.setFirstName(requestObj.getFirstName());
+        person.setLastName(requestObj.getLastName());
+        try {
+            new PersonJpaController(emf).edit(person);
+        } catch (Exception ex) {
+            Logger.getLogger(ApiPerson.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 }
