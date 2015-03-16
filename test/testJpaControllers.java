@@ -386,4 +386,72 @@ public class testJpaControllers {
         System.out.println(objList.get(0).toString());
 
     }
+    @Test
+    public void testGetCompInfoByPhone() throws NonexistentEntityException{
+        Company c = new Company("Silvan", "BlablaSilvanBla", 12345, 6666, 200, "silvan@silvanMail.dk");
+        Phone ph = new Phone(12345678, "blabla");
+        Address a = new Address("Enghavevej 1", "bla?");
+
+        cjc.create(c);
+        phjc.createAndAssingToCompany(ph, c);
+        ajc.create(a, 2650);
+        ajc.assignCompanyToAddress(a, c);
+
+        String DataO = cjc.getCompanyInfo(12345678);
+        String[] pData = DataO.split(" ");
+
+        assertTrue(pData[0].contains("Silvan"));
+        assertTrue(pData[1].contains("BlablaSilvanBla"));
+        assertTrue(pData[2].contains("6666"));
+        assertTrue(pData[3].contains("silvan@silvanMail.dk"));
+        assertTrue(pData[4].contains("Enghavevej"));
+        assertTrue(pData[5].contains("1"));
+        assertTrue(pData[6].contains("2650"));
+        assertTrue(pData[7].contains("Hvidovre"));
+
+        //pjc.destroy(pjc.findPersonEntities().get(0).getId());
+        ajc.destroy(ajc.findAddressEntities().get(0).getId());
+
+        assertTrue(cjc.findCompanyEntities().isEmpty());
+        assertTrue(pjc.findPersonEntities().isEmpty());
+        assertTrue(iejc.findInfoEntityEntities().isEmpty());
+        assertTrue(phjc.findPhoneEntities().isEmpty());
+        assertTrue(ajc.findAddressEntities().isEmpty());
+        assertTrue(hjc.findHobbyEntities().isEmpty());
+
+    }
+     @Test
+    public void testGetCompInfoByCvr() throws NonexistentEntityException{
+        Company c = new Company("Silvan", "BlablaSilvanBla", 12345, 6666, 200, "silvan@silvanMail.dk");
+        Phone ph = new Phone(12345678, "blabla");
+        Address a = new Address("Enghavevej 1", "bla?");
+
+        cjc.create(c);
+        phjc.createAndAssingToCompany(ph, c);
+        ajc.create(a, 2650);
+        ajc.assignCompanyToAddress(a, c);
+
+        String DataO = cjc.getCompanyInfo(12345);
+        String[] pData = DataO.split(" ");
+
+        assertTrue(pData[0].contains("Silvan"));
+        assertTrue(pData[1].contains("BlablaSilvanBla"));
+        assertTrue(pData[2].contains("6666"));
+        assertTrue(pData[3].contains("silvan@silvanMail.dk"));
+        assertTrue(pData[4].contains("Enghavevej"));
+        assertTrue(pData[5].contains("1"));
+        assertTrue(pData[6].contains("2650"));
+        assertTrue(pData[7].contains("Hvidovre"));
+
+        //pjc.destroy(pjc.findPersonEntities().get(0).getId());
+        ajc.destroy(ajc.findAddressEntities().get(0).getId());
+
+        assertTrue(cjc.findCompanyEntities().isEmpty());
+        assertTrue(pjc.findPersonEntities().isEmpty());
+        assertTrue(iejc.findInfoEntityEntities().isEmpty());
+        assertTrue(phjc.findPhoneEntities().isEmpty());
+        assertTrue(ajc.findAddressEntities().isEmpty());
+        assertTrue(hjc.findHobbyEntities().isEmpty());
+    }
+    
 }
