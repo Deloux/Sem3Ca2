@@ -11,10 +11,13 @@ import com.google.gson.Gson;
 import entity.Phone;
 import entity.Person;
 import java.util.List;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 import javax.ws.rs.core.Context;
 import javax.ws.rs.core.UriInfo;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.FormParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -30,42 +33,34 @@ public class ApiPerson {
 
     @Context
     private UriInfo context;
-
+    
+    EntityManagerFactory emf;
     /**
      * Creates a new instance of Person
      */
     public ApiPerson() {
+        emf = Persistence.createEntityManagerFactory("Sem3Ca2PU");
     }
-
-    /**
-     * Retrieves representation of an instance of REST.Person
-     * @return an instance of java.lang.String
-     */
+    
     @GET
     @Produces("application/json")
-    public String getJson() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    public String findAllPersons() {
+       List<Object> result = new PersonJpaController(emf).getAllPersonInfo();
+       return new Gson().toJson(result);
     }
     
     @GET
     @Path("phone/{phone}")
     @Produces("application/json")
-    public String find(@PathParam("phone") Integer phone) {
-       List result = new PersonJpaController().getPersonInfo(new Phone(phone, ""));
+    public String findPerson(@PathParam("phone") Integer phone) {
+       List result = new PersonJpaController(emf).getPersonInfo(phone);
        return new Gson().toJson(result );
     }
 
-    /**
-     * PUT method for updating or creating an instance of Person
-     * @param content representation for the resource
-     * @return an HTTP response with content of the updated or created resource.
-     */
     @PUT
-    @Path("{first_name}/{last_name}/{email}")
     @Consumes("application/json")
-    public void putJson(@PathParam("first_name") String first_name, @PathParam("last_name") String last_name, @PathParam("email") String email) {
+    public void putJson(@FormParam("first_name") String first_name, @FormParam("last_name") String last_name, @FormParam("email") String email) {
         Person person = new Person(first_name, last_name, email);
-        new PersonJpaController().create(person);
+        new PersonJpaController(emf).create(person);
     }
 }

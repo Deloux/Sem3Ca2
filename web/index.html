@@ -17,14 +17,25 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h1>Person web services</h1>
+                        <h1>3. Semester ka2 Gruppe 6</h1>
+                    </div>
+                    <div class="jumbotron">
+                      <h1>Java based restful API with JPA, JAX-RS</h1>
+                      <p><a class="btn btn-primary btn-lg" target="_blank" href="https://github.com/Deloux/Sem3Ca2" role="button">View on Github</a></p>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="page-header">
+                        <h2>Person web services</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="well">
-                        <h2>Find person by name</h2>
+                        <h3>Find person by name</h3>
                         
                         <form method="GET" action="/API/person/">
                             <div class="form-group">
@@ -38,7 +49,7 @@ and open the template in the editor.
                 </div>
                 <div class="col-md-6">
                     <div class="well">
-                        <h2>Find person by phone</h2>
+                        <h3>Find person by phone</h3>
                         
                         <form method="GET" action="/API/person/phone/">
                             <div class="form-group">
@@ -51,18 +62,35 @@ and open the template in the editor.
                     </div>
                 </div>
             </div>
-            
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="well">
+                        <h3>Show all persons <button type="submit" class="btn btn-default">Refresh <span aria-hidden="true" class="glyphicon glyphicon-refresh"></span></button></h3>
+                        <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+
+                            </tbody>
+                        </table>
+                   </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h1>Company web services</h1>
+                        <h2>Company web services</h2>
                     </div>
                 </div>
             </div>
             <div class="row">
                 <div class="col-md-6">
                     <div class="well">
-                        <h2>Find company by name</h2>
+                        <h3>Find company by name</h3>
                         
                         <form method="GET" action="/API/person/">
                             <div class="form-group">
@@ -76,7 +104,7 @@ and open the template in the editor.
                 </div>
                 <div class="col-md-6">
                     <div class="well">
-                        <h2>Find company by phone</h2>
+                        <h3>Find company by phone</h3>
                         
                         <form method="GET" action="/API/person/">
                             <div class="form-group">

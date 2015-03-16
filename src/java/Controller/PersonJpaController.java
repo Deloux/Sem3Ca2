@@ -156,7 +156,7 @@ public class PersonJpaController implements Serializable {
 //            em.close();
 //        }
 //    }
-public void assignPersonToHobby(Person p, Hobby h) {
+    public void assignPersonToHobby(Person p, Hobby h) {
         EntityManager em = getEntityManager();
         try {
             p.addHobby(h);
@@ -168,7 +168,19 @@ public void assignPersonToHobby(Person p, Hobby h) {
             em.close();
         }
     }
-public List<DataObject> getPersonInfo(int phoneNum) {
+    public List<Object> getAllPersonInfo() {
+        String result = "";
+        EntityManager em = getEntityManager();
+
+        Query q = em.createQuery("select IE.EMAIL, P.FIRSTNAME, P.LASTNAME, A.STREET, A.CITYINFO_ZIPCODE, A.ADDITIONALINFO, H.\"NAME\", H.DESCRIPTION, CI.CITY"
+        +"from CPHMH35.INFOENTITY IE "
+        +"join CPHMH35.PERSON P on IE.ID = P.ID "
+        +"where IE.DTYPE = 'Person' ");
+        List<Object> queryResult = q.getResultList(); 
+        return queryResult;
+    }
+    
+    public List<DataObject> getPersonInfo(int phoneNum) {
         String result = "";
         EntityManager em = getEntityManager();
 //        try {
