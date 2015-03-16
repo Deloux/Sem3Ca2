@@ -151,31 +151,85 @@ and open the template in the editor.
                                 <td>/API/person</td>
                                 <td></td>
                                 <td><pre>[
-    {},
-    {},
+    {
+        'firstName' : 'Per',
+        'lasttName' : 'larsen',
+        'email' : 'Per@mail.com'
+    },
+    {
+        'firstName' : 'Niels',
+        'lasttName' : 'Persson',
+        'email' : 'Niels@mail.com'
+    },
     ...
  ]</pre></td>
                               </tr>
                               <tr>
                                 <td>GET</td>
-                                <td>/API/person/id</td>
-                                <td>Get person info by id</td>
+                                <td>/API/person/id/1</td>
+                                <td></td>
+                                <td><pre>[
+    {
+        'firstName' : 'Per',
+        'lasttName' : 'larsen',
+        'email' : 'Per@mail.com'
+    },
+ ]</pre></td>
                               </tr>
                               <tr>
                                 <td>GET</td>
-                                <td>/API/person/name</td>
-                                <td>Get person info by name</td>
+                                <td>/API/person/name/per</td>
+                                <td></td>
+                                <td><pre>[
+    {
+        'firstName' : 'Per',
+        'lasttName' : 'larsen',
+        'email' : 'Per@mail.com'
+    },
+ ]</pre></td>
                               </tr>
                               <tr>
-                                <td>GET</td>
-                                <td>/API/person/phone</td>
-                                <td>Get person info by phone number</td>
+                                <td>PUT</td>
+                                <td>/API/person/</td>
+                                <td>
+                                <pre>[
+    {
+        'firstName' : 'Per',
+        'lasttName' : 'larsen',
+        'email' : 'Per@mail.com'
+    },
+ ]</pre></td>
+ <td>
+     <pre>[
+    {
+        'id' : '1',
+        'firstName' : 'Per',
+        'lasttName' : 'larsen',
+        'email' : 'Per@mail.com'
+    },
+ ]</pre>
+ </td>
                               </tr>
                               <tr>
                                
-                                <td>Larry</td>
-                                <td>the Bird</td>
-                                <td>@twitter</td>
+                                <td>POST</td>
+                                <td>/API/person</td>
+                                <td>
+                                <pre>[
+    {
+        'id' : '1',
+        'lasttName' : 'Petersen',
+    },
+ ]</pre></td>
+ <td>
+     <pre>[
+    {
+        'firstName' : 'Per',
+        'lasttName' : 'Petersen',
+        'email' : 'Per@mail.com'
+    },
+ ]</pre>
+ </td>
                               </tr>
                             </tbody>
                         </table>
@@ -185,9 +239,17 @@ and open the template in the editor.
             <div class="row">
                 <div class="col-md-12">
                     <div class="page-header">
-                        <h2>Documentation API</h2>
+                        <h2>Documentation Project</h2>
+                        <h3>Test strategies</h3>
+                        <p>We have used test driven development in the sense of test first design</p>
+                        <p><img src="images/tests.jpg" /><p>
+                        <h3>Code design</h3>
+                        <p>The facade pattern used to implement jpa classes as fronts for the entities, and a restful design of the API</p>
+                        <h3>Inheritance strategy</h3>
+                        <p>We are using a joined inheritance strategy, since it seems the most logical compared to our business model</p>
+                        <h3>Who did what</h3>
                         <p>Mads: API, Web, Openshift deployment and Documentation and some of JPA classes</p>
-                        <p>Alex: Creation of JPA classes and tests for these</p>
+                        <p>Alex: Creation of JPA classes and tests for these also creation of entity classes</p>
                         <p>Kasper: Some of JPA classes and data fillers</p>
                     </div>
                 </div>
