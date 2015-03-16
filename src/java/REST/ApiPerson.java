@@ -22,6 +22,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.PUT;
+import javax.ws.rs.POST;
 
 /**
  * REST Web Service
@@ -53,13 +54,28 @@ public class ApiPerson {
     @Path("phone/{phone}")
     @Produces("application/json")
     public String findPerson(@PathParam("phone") Integer phone) {
-       List result = new PersonJpaController(emf).getPersonInfo(phone);
+       List result = new PersonJpaController(emf).getPersonInfoByPhone(phone);
+       return new Gson().toJson(result );
+    }
+    
+    @GET
+    @Path("name/{name}")
+    @Produces("application/json")
+    public String findPerson(@PathParam("name") String name) {
+       List result = new PersonJpaController(emf).getPersonInfoByName(name);
        return new Gson().toJson(result );
     }
 
+    @POST
+    @Consumes("application/json")
+    public void createPerson(@FormParam("first_name") String first_name, @FormParam("last_name") String last_name, @FormParam("email") String email) {
+        Person person = new Person(first_name, last_name, email);
+        new PersonJpaController(emf).create(person);
+    }
+    
     @PUT
     @Consumes("application/json")
-    public void putJson(@FormParam("first_name") String first_name, @FormParam("last_name") String last_name, @FormParam("email") String email) {
+    public void editPerson(@FormParam("first_name") String first_name, @FormParam("last_name") String last_name, @FormParam("email") String email) {
         Person person = new Person(first_name, last_name, email);
         new PersonJpaController(emf).create(person);
     }

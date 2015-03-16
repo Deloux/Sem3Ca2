@@ -360,7 +360,7 @@ public class testJpaControllers {
         pjc.assignPersonToHobby(p, h);
         ajc.assignPersonToAddress(a, p);
 
-        List objList = pjc.getPersonInfo(12345678);
+        List objList = pjc.getPersonInfoByPhone(12345678);
         String DataO = objList.get(0).toString();
         String[] pData = DataO.split(",");
 

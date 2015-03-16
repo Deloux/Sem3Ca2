@@ -180,7 +180,7 @@ public class PersonJpaController implements Serializable {
         return queryResult;
     }
     
-    public List<DataObject> getPersonInfo(int phoneNum) {
+    public List<DataObject> getPersonInfoByPhone(int phoneNum) {
         String result = "";
         EntityManager em = getEntityManager();
 //        try {
@@ -223,5 +223,24 @@ public class PersonJpaController implements Serializable {
 //        objList.add(new DataObject(6, zip.get(0)));
 //        
         return objList;
+    }
+    public List<Object> getPersonInfoByName(String name) {
+        String result = "";
+        EntityManager em = getEntityManager();
+//        try {
+//        
+//    } catch (Exception e) {
+//    }
+        String[] names = name.split(" ");
+        Query q1 = em.createQuery("SELECT IE.EMAIL, P.FIRSTNAME, P.LASTNAME FROM Person p JOIN INFOENTITY ON IE.ID = P.ID WHERE p.FIRSTNAME LIKE %"+names[0]+"%");
+        List<Object> queryResult1 = q1.getResultList();
+        
+        Query q2 = em.createQuery("SELECT IE.EMAIL, P.FIRSTNAME, P.LASTNAME FROM Person p JOIN INFOENTITY ON IE.ID = P.ID WHERE p.LASTNAME LIKE %"+names[1]+"%");
+        List<Object> queryResult2 = q2.getResultList();
+        
+        List<Object> allResults = new ArrayList<Object>(queryResult1);
+        allResults.addAll(queryResult2);
+        
+        return allResults;
     }
 }
